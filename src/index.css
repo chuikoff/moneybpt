@@ -564,3 +564,77 @@ a {
   color: var(--text-muted);
   margin: 0 0 12px;
 }
+
+.seg-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+.seg-tab {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.seg-tab.active {
+  background: var(--surface);
+  color: var(--accent-hover);
+  box-shadow: var(--shadow);
+}
+
+.period-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+}
+
+.period-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.period-row:hover {
+  border-color: var(--border);
+}
+
+.period-row.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.period-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.period-meta {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.period-sum {
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--accent);
+}

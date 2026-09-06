@@ -83,7 +83,7 @@ export function Settings({ onChanged, onImported, fileInputRef }: Props) {
   return (
     <div>
       <h1 className="page-title">Настройки</h1>
-      <p className="page-sub">Данные только на устройстве · без сервера</p>
+      <p className="page-sub">IndexedDB на этом устройстве · без сервера</p>
 
       <p className="section-label">Импорт</p>
       <div className="card">
@@ -152,9 +152,9 @@ export function Settings({ onChanged, onImported, fileInputRef }: Props) {
       <p className="section-label">О приложении</p>
       <div className="card">
         <p className="hint" style={{ marginBottom: 0 }}>
-          MoneyBPT — личный учёт расходов. Все операции хранятся в IndexedDB
-          браузера. Нет бэкенда и аналитики. Можно установить как PWA для
-          офлайн-работы.
+          MoneyBPT — личный учёт расходов. Данные хранятся в IndexedDB
+          браузера на этом устройстве только (локальное хранилище). Нет
+          бэкенда и аналитики. Можно установить как PWA для офлайн-работы.
         </p>
       </div>
 
