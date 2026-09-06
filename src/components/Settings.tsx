@@ -95,7 +95,7 @@ export function Settings({ onChanged, onImported, fileInputRef }: Props) {
         <input
           ref={inputRef}
           type="file"
-          accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values"
+          accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain,*/*"
           hidden
           onChange={(e) => onFile(e.target.files?.[0])}
         />

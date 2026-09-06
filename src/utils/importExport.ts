@@ -38,9 +38,16 @@ function detectDelimiter(headerLine: string): '\t' | ',' {
   return tabs >= commas ? '\t' : ','
 }
 
+function cleanCell(raw: string): string {
+  let s = raw.replace(/\uFEFF/g, '').trim()
+  if (s.length >= 2 && s.startsWith('"') && s.endsWith('"')) {
+    s = s.slice(1, -1).replace(/""/g, '"')
+  }
+  return s.replace(/\uFEFF/g, '').trim()
+}
+
 function splitLine(line: string, delim: '\t' | ','): string[] {
-  if (delim === '\t') return line.split('\t').map((c) => c.trim())
-  // Simple CSV split respecting quotes
+  // Quote-aware split for both tab and comma (Money Pro quotes every field)
   const result: string[] = []
   let cur = ''
   let inQuotes = false
@@ -53,14 +60,14 @@ function splitLine(line: string, delim: '\t' | ','): string[] {
       } else {
         inQuotes = !inQuotes
       }
-    } else if (ch === ',' && !inQuotes) {
-      result.push(cur.trim())
+    } else if (ch === delim && !inQuotes) {
+      result.push(cleanCell(cur))
       cur = ''
     } else {
       cur += ch
     }
   }
-  result.push(cur.trim())
+  result.push(cleanCell(cur))
   return result
 }
 
@@ -116,7 +123,7 @@ export async function parseImportFile(file: File): Promise<{
 
   const delim = detectDelimiter(lines[0])
   const headers = splitLine(lines[0], delim).map((h) =>
-    h.replace(/^\uFEFF/, '').trim().toLowerCase(),
+    h.replace(/\uFEFF/g, '').trim().toLowerCase(),
   )
   const idx: Record<string, number> = {}
   headers.forEach((h, i) => {
